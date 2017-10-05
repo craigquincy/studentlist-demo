@@ -7,8 +7,7 @@ const router = express.Router();
 
 
 router.get('/', (req, res, next) => {
-  // render template here
-
+  res.render('students/index', { title: 'Student Mantras', _layoutFile: 'layout.ejs' });
 });
 
 module.exports = router
