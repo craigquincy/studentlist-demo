@@ -35,21 +35,16 @@ $(document).ready(() => {
     }
   })
 
-  // event listener
-  $('#saveStudent').click((e) => {
-    console.log("save clicked?");
+  // new student form
+  $('#newStudent').submit((e) => {
     e.preventDefault()
 
-    console.log("submit event is...", e);
-
-    let data = {
-      name: $('#newStudent #name').val(),
-      mantra: $('#newStudent #mantra').val()
-    }
+    let data = $('#newStudent').serialize()
 
     $.post("/api/v1/students", data, null, 'json')
     .then((data) => {
       console.log("POSTED data", data);
+      document.location = '/students';
     })
     .fail((err) => {
       $('#errorMessage').html(
