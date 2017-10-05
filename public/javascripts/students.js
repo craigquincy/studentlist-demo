@@ -12,4 +12,21 @@ $(document).ready(() => {
       </tr>`))
     })
   })
+
+  // event listener
+  $('#saveStudent').click((e) => {
+    console.log("save clicked?");
+    e.preventDefault()
+
+    console.log("submit event is...", e);
+
+    let data = {
+      name: $('#newStudent #name').val(),
+      mantra: $('#newStudent #mantra').val()
+    }
+
+    $.post("/api/v1/students", data, null, 'json').then((data) => {
+      console.log("POSTED data", data);
+    })
+  })
 })
