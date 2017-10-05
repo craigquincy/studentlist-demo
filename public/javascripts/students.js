@@ -25,8 +25,15 @@ $(document).ready(() => {
       mantra: $('#newStudent #mantra').val()
     }
 
-    $.post("/api/v1/students", data, null, 'json').then((data) => {
+    $.post("/api/v1/students", data, null, 'json')
+    .then((data) => {
       console.log("POSTED data", data);
+    })
+    .fail((err) => {
+      $('#errorMessage').html(
+        `<div class="alert alert-danger" role="alert">
+        ${err.responseText}</div>`
+      )
     })
   })
 })
