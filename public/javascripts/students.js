@@ -1,12 +1,13 @@
 $(document).ready(() => {
 
+  // get all students
   $.getJSON('/api/v1/students').then(data => {
     console.log("get students", data)
     let tbody = $('#studentList tbody')
 
     data.forEach((student, i) => {
       tbody.append($(`<tr>
-        <td>${student.id}</td>
+        <td><a href="/students/${student.id}">${student.id}</a></td>
         <td>${student.name}</td>
         <td>${student.mantra}</td>
         <td>
@@ -18,6 +19,18 @@ $(document).ready(() => {
       </tr>`))
     })
   })
+
+  // get single student if there is an id on the end of the url
+  let checkId = document.location.href.match(/\d+$/)
+  if (checkId) {
+    let id = checkId[0]
+
+    $.getJSON(`/api/v1/students/${id}`).then(data => {
+      console.log("fetched a student", id, data);
+      $('.mantra').html(data.mantra)
+      $('.name').html(data.name)
+    })
+  }
 
   // listen to delete buttons
   $('#studentList tbody').on('click', '.deleteBtn', (e) => {

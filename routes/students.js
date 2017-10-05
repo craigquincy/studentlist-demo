@@ -14,4 +14,8 @@ router.get('/new', (req, res, next) => {
   res.render('students/new', { title: 'New Student', _layoutFile: 'layout.ejs' });
 });
 
+router.get('/:id', (req, res, next) => {
+  res.render('students/show', { title: 'Student Info', _layoutFile: 'layout.ejs' });
+});
+
 module.exports = router
