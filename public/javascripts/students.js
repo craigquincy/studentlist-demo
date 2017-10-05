@@ -9,8 +9,30 @@ $(document).ready(() => {
         <td>${student.id}</td>
         <td>${student.name}</td>
         <td>${student.mantra}</td>
+        <td>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary">Edit</button>
+            <button type="button" class="btn btn-secondary deleteBtn" data-id="${student.id}">Delete</button>
+          </div>
+        </td>
       </tr>`))
     })
+  })
+
+  // listen to delete buttons
+  $('#studentList tbody').on('click', '.deleteBtn', (e) => {
+    console.log("you want to delete...", $(e.target).data('id'));
+    let id = $(e.target).data('id')
+    if (id) {
+      $.ajax({
+        url: `/api/v1/students/${id}`,
+        method: "DELETE",
+        dataType: 'json'
+      }).done(data => {
+        $(e.target).closest('tr').hide()
+        console.log("deleted", data);
+      })
+    }
   })
 
   // event listener
