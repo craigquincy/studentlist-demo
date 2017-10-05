@@ -18,4 +18,8 @@ router.get('/:id', (req, res, next) => {
   res.render('students/show', { title: 'Student Info', _layoutFile: 'layout.ejs' });
 });
 
+router.get('/:id/edit', (req, res, next) => {
+  res.render('students/edit', { title: 'Student Info', _layoutFile: 'layout.ejs' });
+});
+
 module.exports = router
